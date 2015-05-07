@@ -1,0 +1,36 @@
+<!--
+  Christopher Cruzen                             LaunchCode CS50
+  "application.xml"                                   05.06.2015
+
+  Problem Set #6
+
+    The primary configuration file for Spring, application.xml
+  allows us to manually create, inject, and define relationships
+  between objects in our application without altering the source
+  code of it's POJO's (plain old java objects). This can be
+  accomplished by explicit instantiation (commented out below)
+  or through annotations directly in the source code (enabled
+  below).
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Component Activation Code -->
+    <!-- Note: Tells Spring to search specified package for any
+         component annotation tags and create bean accordingly. -->
+    <context:component-scan base-package="com.xephorium.greedy"/>
+
+    <!-- Autowire Activation Code -->
+    <!-- Note: Tells Spring to search specified package for any
+         Autowire annotation tags and inject code accordingly. -->
+    <context:annotation-config/>
+
+
+</beans>

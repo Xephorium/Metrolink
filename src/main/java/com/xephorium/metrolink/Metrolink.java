@@ -25,6 +25,10 @@ public class Metrolink
 
     public static void main(String[] args)
     {
-        // TBD
+        MetroMenu myMenu = new MetroMenu();
+
+        myMenu.displayGreeting();
+        myMenu.runMenu();
+
     }
 }

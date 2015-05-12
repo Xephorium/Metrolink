@@ -1,11 +1,18 @@
 /*
-  Christopher Cruzen                         LaunchCode CS50
-  "MetroMenu.java"                                05.09.2015
+  Christopher Cruzen                       LaunchCode CS50
+  "MetroMenu.java"                              05.09.2015
 
   Problem Set #6
 
+    This class represents a Metrolink-specific Menu object
+  that, when activated, allows the user to choose from a
+  number of program options until they decide to quit.
+
 */
 package com.xephorium.metrolink;
+import com.xephorium.metrolink.database.*;
+import com.xephorium.metrolink.database.record.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MetroMenu
@@ -82,6 +89,22 @@ public class MetroMenu
 
     private void act()
     {
+        switch(selection)
+        {
+            // List Stations
+            case 1:
+                ArrayList<Station> stations = new ArrayList<Station>();
+                // Retrieve Stations
+                // Print Stations
+                break;
 
+            // Find Next Arrival
+            case 2:
+                ArrayList<Arrival> stationArrivals = new ArrayList<Arrival>();
+                // Retrieve Arrivals
+                // Calculate Next Arrival
+                // Print Time to Arrival
+                break;
+        }
     }
 }

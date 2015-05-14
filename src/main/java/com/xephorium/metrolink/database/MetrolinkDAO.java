@@ -11,12 +11,15 @@
 
 */
 package com.xephorium.metrolink.database;
+import com.xephorium.metrolink.database.record.*;
+
+import java.util.ArrayList;
 
 public interface MetrolinkDAO
 {
     /*--- Methods ---*/
 
-    public String[] getStations();
+    public ArrayList<Station> getStations();
 
-    public String[] getStationArrivals(int stationID);
+    public ArrayList<Arrival> getStationArrivals(int stationID);
 }

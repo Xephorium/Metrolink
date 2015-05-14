@@ -34,6 +34,14 @@ public class Station
 
     /*--- Methods ---*/
 
+    public boolean equals(Station st)
+    {
+        if(st.getName().equalsIgnoreCase(name) && st.getId() == id)
+            return true;
+        else
+            return false;
+    }
+
     public void setName(String n)
     {
         name = n;

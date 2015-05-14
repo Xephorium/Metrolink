@@ -9,18 +9,25 @@
 
 */
 package com.xephorium.metrolink.database;
+import com.xephorium.metrolink.database.record.*;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class SqliteDAO implements MetrolinkDAO
 {
     /*--- Methods ---*/
 
-    public String[] getStations()
+    public ArrayList<Station> getStations()
     {
-        return new String[]{" ", " ", " "};
+
+
+        return new ArrayList<Station>();
     }
 
-    public String[] getStationArrivals(int stationID)
+    public ArrayList<Arrival> getStationArrivals(int stationID)
     {
-        return new String[]{" ", " ", " "};
+
+
+        return new ArrayList<Arrival>();
     }
 }

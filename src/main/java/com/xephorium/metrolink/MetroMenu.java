@@ -19,15 +19,22 @@ public class MetroMenu
 {
     /*--- Fields ---*/
 
-    private String[] menuItems;
-    private Scanner  reader;
-    private int      selection;
+    private final String RETURN = "back";
+
+    private MetrolinkDAO databaseReader;
+    private String[]     menuItems;
+    private Scanner      reader;
+    private int          selection;
 
 
     /*--- Constructors ---*/
 
     public MetroMenu()
     {
+        // TEMP - TO BE REPLACED BY DI
+        databaseReader = new SqliteDAO();
+        // TEMP
+
         reader = new Scanner(System.in);
         menuItems = new String[3];
         menuItems[0] = "List Stations";
@@ -43,9 +50,9 @@ public class MetroMenu
         do
         {
             this.displayMenu();
-            this.readSelection();
+            this.readInteger();
             this.act();
-        }while(selection != 3);
+        }while(selection != menuItems.length);
     }
 
     public void displayGreeting()
@@ -63,7 +70,7 @@ public class MetroMenu
         System.out.println("");
     }
 
-    private void readSelection()
+    private void readInteger()
     {
         // Input Sentinel
         boolean valid = true;
@@ -81,10 +88,52 @@ public class MetroMenu
             catch(NumberFormatException e)
             { valid = false; }
 
-            if(selection < 1 || selection > 3)
+            if(selection < 1 || selection > menuItems.length)
                 valid = false;
 
         }while(!valid);
+    }
+
+    private Station readUserStation()
+    {
+        Station input;
+
+        // Input Sentinel
+        boolean valid = true;
+        do
+        {
+            // Prompt User & Get Input
+            if(!valid)
+                System.out.println("Invalid station name.");
+            System.out.println("Enter the name of your current station");
+            System.out.print("or 'back' to return to the Main Menu: ");
+            input = new Station(reader.nextLine());
+
+            // Get Stations List
+            ArrayList<Station> stations;
+            stations = databaseReader.getStations();
+
+            // Check User Station Validity
+
+            for(Station st : stations)
+            {
+                if (st.getName().equalsIgnoreCase(input.getName()))
+                {
+                    input.setId(st.getId());
+                    valid = true;
+                    break;
+                }
+                else
+                    valid = false;
+            }
+            if(input.getName().equalsIgnoreCase(RETURN))
+            {
+                valid = true;
+            }
+
+        }while(!valid);
+
+        return input;
     }
 
     private void act()
@@ -93,15 +142,18 @@ public class MetroMenu
         {
             // List Stations
             case 1:
-                ArrayList<Station> stations = new ArrayList<Station>();
-                // Retrieve Stations
+                ArrayList<Station> stations;
+                stations = databaseReader.getStations();
                 // Print Stations
                 break;
 
             // Find Next Arrival
             case 2:
-                ArrayList<Arrival> stationArrivals = new ArrayList<Arrival>();
-                // Retrieve Arrivals
+                Station current = readUserStation();
+                if(current.getName().equalsIgnoreCase(RETURN))
+                    break;
+                ArrayList<Arrival> stationArrivals
+                        = databaseReader.getStationArrivals(current.getId());
                 // Calculate Next Arrival
                 // Print Time to Arrival
                 break;

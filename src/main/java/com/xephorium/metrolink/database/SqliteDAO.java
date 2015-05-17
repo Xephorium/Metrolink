@@ -10,8 +10,9 @@
 */
 package com.xephorium.metrolink.database;
 import com.xephorium.metrolink.database.record.*;
+import com.xephorium.metrolink.database.record.Time;
+
 import java.sql.*;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class SqliteDAO implements MetrolinkDAO
@@ -25,7 +26,7 @@ public class SqliteDAO implements MetrolinkDAO
 
     public ArrayList<Station> getStations()
     {
-        try(Connection connection = getConnection();)
+        try(Connection connection = getConnection())
         {
             // Read From Database
             String query = "SELECT DISTINCT stop_name,stop_id FROM stops WHERE stop_name GLOB '*METROLINK STATION';";
@@ -48,9 +49,9 @@ public class SqliteDAO implements MetrolinkDAO
         { throw new RuntimeException("Error Retrieving Stations"); }
     }
 
-    public ArrayList<Arrival> getStationArrivals(int stationID)
+    public ArrayList<Time> getStationArrivals(int stationID)
     {
-        try(Connection connection = getConnection();)
+        try(Connection connection = getConnection())
         {
             // Read From Database
             String query = "SELECT DISTINCT arrival_time FROM stop_times WHERE stop_id = " + stationID + ";";
@@ -58,19 +59,16 @@ public class SqliteDAO implements MetrolinkDAO
             ResultSet resultSet = preparedStatement.executeQuery();
 
             // Parse Arrivals
-            ArrayList<Arrival> arrivals = new ArrayList<Arrival>();
+            ArrayList<Time> times = new ArrayList<Time>();
             while(resultSet.next())
             {
-                // Convert Literal to Time
-                LocalTime time = convertDatabaseTime(resultSet.getString("arrival_time"));
-
-                // Add Time
-                Arrival arrival = new Arrival(time);
-                arrivals.add(arrival);
+                // Convert Literal & Add Time
+                Time time = Time.convertString(resultSet.getString("arrival_time"));
+                times.add(time);
             }
 
             // Return Arrivals
-            return arrivals;
+            return times;
         }
         catch (SQLException e)
         { throw new RuntimeException("Error Retrieving Stations"); }
@@ -90,12 +88,4 @@ public class SqliteDAO implements MetrolinkDAO
         return DriverManager.getConnection(JDBC_SQLITE_METROLINK_DB);
     }
 
-    public LocalTime convertDatabaseTime(String literal)
-    {
-        System.out.println(literal);
-        int hour   = Integer.parseInt(literal.substring(0,2));
-        int minute = Integer.parseInt(literal.substring(3,5));
-        int second = Integer.parseInt(literal.substring(6,8));
-        return LocalTime.of(hour, minute, second);
-    }
 }

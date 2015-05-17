@@ -9,18 +9,17 @@
 
 */
 package com.xephorium.metrolink.database.record;
-import java.time.*;
 
 public class Arrival
 {
     /*--- Fields ---*/
 
-    LocalTime time;
+    Time time;
 
 
     /*--- Constructor(s) ---*/
 
-    public Arrival(LocalTime t)
+    public Arrival(Time t)
     {
         time = t;
     }
@@ -28,12 +27,12 @@ public class Arrival
 
     /*--- Methods ---*/
 
-    public void setTime(LocalTime t)
+    public void setTime(Time t)
     {
         time = t;
     }
 
-    public LocalTime getTime()
+    public Time getTime()
     {
         return time;
     }

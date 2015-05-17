@@ -151,8 +151,9 @@ public class MetroMenu
                 Station current = readUserStation();
                 if(current.getName().equalsIgnoreCase(RETURN))
                     break;
-                ArrayList<Arrival> stationArrivals
-                        = databaseReader.getStationArrivals(current.getId());
+                ArrayList<Time> times = databaseReader.getStationArrivals(current.getId());
+                for(Time t: times)
+                    System.out.println("  " + t.toString());
                 // Calculate Next Arrival
                 // Print Time to Arrival
                 break;

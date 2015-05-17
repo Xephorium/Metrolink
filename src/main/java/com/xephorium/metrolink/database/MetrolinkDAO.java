@@ -21,5 +21,5 @@ public interface MetrolinkDAO
 
     public ArrayList<Station> getStations();
 
-    public ArrayList<Arrival> getStationArrivals(int stationID);
+    public ArrayList<Time> getStationArrivals(int stationID);
 }

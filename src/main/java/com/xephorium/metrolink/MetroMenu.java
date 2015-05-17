@@ -153,8 +153,6 @@ public class MetroMenu
                     break;
                 ArrayList<Arrival> stationArrivals
                         = databaseReader.getStationArrivals(current.getId());
-                for(Arrival arrival: stationArrivals)
-                    System.out.printf("   %s\n", arrival.getTime().toString());
                 // Calculate Next Arrival
                 // Print Time to Arrival
                 break;

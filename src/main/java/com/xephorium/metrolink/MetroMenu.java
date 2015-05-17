@@ -114,7 +114,6 @@ public class MetroMenu
             stations = databaseReader.getStations();
 
             // Check User Station Validity
-
             for(Station st : stations)
             {
                 if (st.getName().equalsIgnoreCase(input.getName()))
@@ -142,9 +141,9 @@ public class MetroMenu
         {
             // List Stations
             case 1:
-                ArrayList<Station> stations;
-                stations = databaseReader.getStations();
-                // Print Stations
+                ArrayList<Station> stations = databaseReader.getStations();
+                for(Station station: stations)
+                    System.out.printf("   %s\n", station.getName());
                 break;
 
             // Find Next Arrival
@@ -154,6 +153,8 @@ public class MetroMenu
                     break;
                 ArrayList<Arrival> stationArrivals
                         = databaseReader.getStationArrivals(current.getId());
+                for(Arrival arrival: stationArrivals)
+                    System.out.printf("   %s\n", arrival.getTime().toString());
                 // Calculate Next Arrival
                 // Print Time to Arrival
                 break;

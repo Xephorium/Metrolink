@@ -9,48 +9,33 @@
 
 */
 package com.xephorium.metrolink.database.record;
+import java.time.*;
 
 public class Arrival
 {
     /*--- Fields ---*/
 
-    int    time;
-    String headSign;
+    LocalTime time;
 
 
     /*--- Constructor(s) ---*/
 
-    public Arrival(int t)
+    public Arrival(LocalTime t)
     {
         time = t;
-    }
-
-    public Arrival(int t, String h)
-    {
-        time = t;
-        headSign = h;
     }
 
 
     /*--- Methods ---*/
 
-    public void setTime(int t)
+    public void setTime(LocalTime t)
     {
         time = t;
     }
 
-    public void setHeadSign(String h)
-    {
-        headSign = h;
-    }
-
-    public int getTime()
+    public LocalTime getTime()
     {
         return time;
     }
 
-    public String getHeadSign()
-    {
-        return headSign;
-    }
 }

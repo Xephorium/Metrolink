@@ -41,5 +41,11 @@
             <version>4.12</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.8.7</version>
+        </dependency>
+
     </dependencies>
 </project>

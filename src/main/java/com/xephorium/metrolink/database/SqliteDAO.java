@@ -62,7 +62,6 @@ public class SqliteDAO implements MetrolinkDAO
             ArrayList<Time> times = new ArrayList<Time>();
             while(resultSet.next())
             {
-                // Convert Literal & Add Time
                 Time time = Time.convertString(resultSet.getString("arrival_time"));
                 times.add(time);
             }

@@ -78,7 +78,6 @@ public class TimeTest
     public void untilShouldReturnAmountOfTimeUntilParameter()
     {
         /*--- Anticipated Failures---*/
-        assertFalse(new Time(24, 0, 0).equals(new Time(0, 0, 0).until(new Time(0, 0, 0))));
         assertFalse(new Time(0, 0, 0).equals(new Time(12, 0, 0).until(new Time(14, 0, 0))));
         assertFalse(new Time(12, 0, 0).equals(new Time(23, 59, 59).until(new Time(23, 59, 59))));
 

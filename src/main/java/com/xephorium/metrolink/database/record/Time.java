@@ -14,6 +14,10 @@
 */
 package com.xephorium.metrolink.database.record;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class Time
 {
     /*--- Fields ---*/
@@ -206,5 +210,12 @@ public class Time
             return h;
         else
             return h % 24;
+    }
+
+    public static Time getCurrent()
+    {
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        String currentTime = dateFormat.format(Calendar.getInstance().getTime());
+        return Time.convertString(currentTime);
     }
 }

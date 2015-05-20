@@ -11,10 +11,11 @@
 package com.xephorium.metrolink.database;
 import com.xephorium.metrolink.database.record.*;
 import com.xephorium.metrolink.database.record.Time;
-
+import org.springframework.stereotype.Component;
 import java.sql.*;
 import java.util.ArrayList;
 
+@Component("databaseReader")
 public class SqliteDAO implements MetrolinkDAO
 {
     /*--- Fields ---*/

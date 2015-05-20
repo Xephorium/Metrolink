@@ -25,7 +25,7 @@
     <!-- Component Activation Code -->
     <!-- Note: Tells Spring to search specified package for any
          component annotation tags and create bean accordingly. -->
-    <context:component-scan base-package="com.xephorium.greedy"/>
+    <context:component-scan base-package="com.xephorium.metrolink"/>
 
     <!-- Autowire Activation Code -->
     <!-- Note: Tells Spring to search specified package for any

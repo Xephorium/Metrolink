@@ -36,10 +36,7 @@ public class Station
 
     public boolean equals(Station st)
     {
-        if(st.getName().equalsIgnoreCase(name) && st.getId() == id)
-            return true;
-        else
-            return false;
+        return (st.getName().equalsIgnoreCase(name) && st.getId() == id);
     }
 
     public void setName(String n)

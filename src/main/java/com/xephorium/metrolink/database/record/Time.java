@@ -22,9 +22,10 @@ public class Time
 {
     /*--- Fields ---*/
 
-    private static final int MAX_HOURS   = 47;
-    private static final int MAX_MINUTES = 59;
-    private static final int MAX_SECONDS = 59;
+    private static final int        MAX_HOURS   = 47;
+    private static final int        MAX_MINUTES = 59;
+    private static final int        MAX_SECONDS = 59;
+    private static final DateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
 
     int hour;
     int minute;
@@ -214,8 +215,7 @@ public class Time
 
     public static Time getCurrent()
     {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-        String currentTime = dateFormat.format(Calendar.getInstance().getTime());
+        String currentTime = TIME_FORMAT.format(Calendar.getInstance().getTime());
         return Time.convertString(currentTime);
     }
 }

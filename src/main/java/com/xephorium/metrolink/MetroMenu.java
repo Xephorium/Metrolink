@@ -12,15 +12,21 @@
 package com.xephorium.metrolink;
 import com.xephorium.metrolink.database.*;
 import com.xephorium.metrolink.database.record.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+@Component("myMenu")
+@Scope("prototype")
 public class MetroMenu
 {
     /*--- Fields ---*/
 
     private final String RETURN = "back";
 
+    @Autowired
     private MetrolinkDAO databaseReader;
     private String[]     menuItems;
     private Scanner      reader;
@@ -31,10 +37,6 @@ public class MetroMenu
 
     public MetroMenu()
     {
-        // TEMP - TO BE REPLACED BY DI
-        databaseReader = new SqliteDAO();
-        // TEMP
-
         reader = new Scanner(System.in);
         menuItems = new String[3];
         menuItems[0] = "List Stations";
@@ -50,7 +52,7 @@ public class MetroMenu
         do
         {
             this.displayMenu();
-            this.readInteger();
+            this.readSelection();
             this.act();
         }while(selection != menuItems.length);
     }
@@ -70,7 +72,7 @@ public class MetroMenu
         System.out.println("");
     }
 
-    private void readInteger()
+    private void readSelection()
     {
         // Input Sentinel
         boolean valid = true;

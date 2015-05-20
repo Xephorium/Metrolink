@@ -105,8 +105,7 @@ public class MetroMenu
             // Prompt User & Get Input
             if(!valid)
                 System.out.println("Invalid station name.");
-            System.out.println("Enter the name of your current station");
-            System.out.print("or 'back' to return to the Main Menu: ");
+            System.out.print("Current Station (or 'back'): ");
             input = new Station(reader.nextLine());
 
             // Get Stations List
@@ -148,14 +147,17 @@ public class MetroMenu
 
             // Find Next Arrival
             case 2:
+
                 Station current = readUserStation();
                 if(current.getName().equalsIgnoreCase(RETURN))
                     break;
                 ArrayList<Time> times = databaseReader.getStationArrivals(current.getId());
+                Time currentTime  = Time.getCurrent();
+                Time untilArrival = times.get(0);
                 for(Time t: times)
-                    System.out.println("  " + t.toString());
-                // Calculate Next Arrival
-                // Print Time to Arrival
+                    if(currentTime.until(t).earlierThan(untilArrival))
+                        untilArrival = currentTime.until(t);
+                System.out.println("Next arrival in " + untilArrival.toString() + ".");
                 break;
         }
     }

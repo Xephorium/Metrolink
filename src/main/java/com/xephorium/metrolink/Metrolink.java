@@ -15,6 +15,7 @@
 */
 package com.xephorium.metrolink;
 
+import com.xephorium.metrolink.menu.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -31,7 +32,7 @@ public class Metrolink
         ApplicationContext context = new
                 ClassPathXmlApplicationContext("application.xml");
 
-        MetroMenu myMenu = (MetroMenu) context.getBean("myMenu");
+        Menu myMenu = (MetroMenu) context.getBean("myMenu");
         myMenu.displayGreeting();
         myMenu.runMenu();
     }

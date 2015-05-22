@@ -9,7 +9,7 @@
   number of program options until they decide to quit.
 
 */
-package com.xephorium.metrolink;
+package com.xephorium.metrolink.menu;
 import com.xephorium.metrolink.database.*;
 import com.xephorium.metrolink.database.record.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.Scanner;
 
 @Component("myMenu")
 @Scope("prototype")
-public class MetroMenu
+public class MetroMenu implements Menu
 {
     /*--- Fields ---*/
 
@@ -47,6 +47,13 @@ public class MetroMenu
 
     /*--- Methods ---*/
 
+    public void displayGreeting()
+    {
+        System.out.print("///////////////////////////\n");
+        System.out.print("// Welcome to Metrolink! //\n");
+        System.out.print("///////////////////////////\n");
+    }
+
     public void runMenu()
     {
         do
@@ -57,14 +64,7 @@ public class MetroMenu
         }while(selection != menuItems.length);
     }
 
-    public void displayGreeting()
-    {
-        System.out.print("///////////////////////////\n");
-        System.out.print("// Welcome to Metrolink! //\n");
-        System.out.print("///////////////////////////\n");
-    }
-
-    private void displayMenu()
+    public void displayMenu()
     {
         System.out.println("\nMain Menu");
         for(int x = 0; x <  menuItems.length; x++)
@@ -72,7 +72,7 @@ public class MetroMenu
         System.out.println("");
     }
 
-    private void readSelection()
+    public void readSelection()
     {
         // Input Sentinel
         boolean valid = true;
@@ -94,6 +94,34 @@ public class MetroMenu
                 valid = false;
 
         }while(!valid);
+    }
+
+    public void act()
+    {
+        switch(selection)
+        {
+            // List Stations
+            case 1:
+                ArrayList<Station> stations = databaseReader.getStations();
+                for(Station station: stations)
+                    System.out.printf("   %s\n", station.getName());
+                break;
+
+            // Find Next Arrival
+            case 2:
+
+                Station current = readUserStation();
+                if(current.getName().equalsIgnoreCase(RETURN))
+                    break;
+                ArrayList<Time> times = databaseReader.getStationArrivals(current.getId());
+                Time currentTime  = Time.getCurrent();
+                Time untilArrival = times.get(0);
+                for(Time t: times)
+                    if(currentTime.until(t).earlierThan(untilArrival))
+                        untilArrival = currentTime.until(t);
+                System.out.println("Next arrival in " + untilArrival.toString() + ".");
+                break;
+        }
     }
 
     private Station readUserStation()
@@ -134,33 +162,5 @@ public class MetroMenu
         }while(!valid);
 
         return input;
-    }
-
-    private void act()
-    {
-        switch(selection)
-        {
-            // List Stations
-            case 1:
-                ArrayList<Station> stations = databaseReader.getStations();
-                for(Station station: stations)
-                    System.out.printf("   %s\n", station.getName());
-                break;
-
-            // Find Next Arrival
-            case 2:
-
-                Station current = readUserStation();
-                if(current.getName().equalsIgnoreCase(RETURN))
-                    break;
-                ArrayList<Time> times = databaseReader.getStationArrivals(current.getId());
-                Time currentTime  = Time.getCurrent();
-                Time untilArrival = times.get(0);
-                for(Time t: times)
-                    if(currentTime.until(t).earlierThan(untilArrival))
-                        untilArrival = currentTime.until(t);
-                System.out.println("Next arrival in " + untilArrival.toString() + ".");
-                break;
-        }
     }
 }

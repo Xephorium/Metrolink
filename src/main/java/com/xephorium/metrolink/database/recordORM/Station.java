@@ -8,7 +8,7 @@
   the train's transit line.
 
 */
-package com.xephorium.metrolink.database.record;
+package com.xephorium.metrolink.database.recordORM;
 
 public class Station
 {

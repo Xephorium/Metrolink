@@ -2,7 +2,7 @@
   Christopher Cruzen                        LaunchCode CS50
   "SqliteDAO.java"                               05.12.2015
 
-  Problem Set #6
+  Problem Set #7
 
     This class contains a concrete set of database access
   methods which give the MetrolinkDAO interface form.
@@ -11,11 +11,11 @@
 package com.xephorium.metrolink.database;
 import com.xephorium.metrolink.database.record.*;
 import com.xephorium.metrolink.database.record.Time;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.ArrayList;
 
-@Component("databaseReader")
+@Repository("databaseReader")
 public class SqliteDAO implements MetrolinkDAO
 {
     /*--- Fields ---*/

@@ -2,7 +2,7 @@
   Christopher Cruzen                         LaunchCode CS50
   "TimeTest.java"                                 05.17.2015
 
-  Problem Set #6
+  Problem Set #7
 
     This is the test class for Metrolink's Test.java class.
 

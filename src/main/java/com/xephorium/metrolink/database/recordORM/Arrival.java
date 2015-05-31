@@ -8,7 +8,9 @@
   along the train's transit line.
 
 */
-package com.xephorium.metrolink.database.record;
+package com.xephorium.metrolink.database.recordORM;
+
+import com.xephorium.metrolink.database.record.Time;
 
 public class Arrival
 {

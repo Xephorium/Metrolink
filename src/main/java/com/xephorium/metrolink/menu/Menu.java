@@ -2,7 +2,7 @@
   Christopher Cruzen                       LaunchCode CS50
   "Menu.java"                                   05.21.2015
 
-  Problem Set #6
+  Problem Set #7
 
     This class represents a generic Menu object that, when
   activated, allows the user to choose from a number of

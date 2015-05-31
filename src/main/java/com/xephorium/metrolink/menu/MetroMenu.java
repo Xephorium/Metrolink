@@ -2,7 +2,7 @@
   Christopher Cruzen                       LaunchCode CS50
   "MetroMenu.java"                              05.09.2015
 
-  Problem Set #6
+  Problem Set #7
 
     This class represents a Metrolink-specific Menu object
   that, when activated, allows the user to choose from a

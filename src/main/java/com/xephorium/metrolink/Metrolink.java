@@ -2,7 +2,7 @@
   Christopher Cruzen                         LaunchCode CS50
   "Metrolink.java"                                05.06.2015
 
-  Problem Set #6
+  Problem Set #7
 
     Create a command line application that employs SQLite to
   read data from a simple database. The application should

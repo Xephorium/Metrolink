@@ -12,7 +12,7 @@
   of up to 47:59:59.
 
 */
-package com.xephorium.metrolink.database.record;
+package com.xephorium.metrolink.database.recordORM;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -12,42 +12,40 @@ package com.xephorium.metrolink.database;
 
 import com.xephorium.metrolink.database.recordORM.*;
 import com.xephorium.metrolink.database.recordORM.Time;
+import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import java.sql.*;
 import java.util.ArrayList;
 
-@Repository("temp")
+@Repository("databaseReader")
 public class HibernateDAO implements MetrolinkDAO
 {
     /*--- Fields ---*/
 
-    public static final String JDBC_SQLITE_METROLINK_DB = "jdbc:sqlite:metrolink.db";
-    public static final String ORG_SQLITE_JDBC          = "org.sqlite.JDBC";
+    @Autowired
+    private SessionFactory sessionFactory;
 
     /*--- Methods ---*/
 
     public ArrayList<Station> getStations()
     {
+        sessionFactory.getCurrentSession().beginTransaction();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Station.class);
+        // List list = criteria.list(); // ArrayList Conversion Issue
+        sessionFactory.getCurrentSession().getTransaction().commit();
         return new ArrayList<Station>();
     }
 
     public ArrayList<Time> getStationArrivals(int stationID)
     {
+        sessionFactory.getCurrentSession().beginTransaction();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Time.class);
+        criteria.add(Restrictions.eq("stop_id", stationID));
+        // List list = criteria.list(); // ArrayList Conversion Issue
+        sessionFactory.getCurrentSession().getTransaction().commit();
         return new ArrayList<Time>();
     }
 
-    private static Connection getConnection() throws SQLException
-    {
-        try
-        {
-            Class.forName(ORG_SQLITE_JDBC);
-        }
-        catch (ClassNotFoundException e)
-        {
-            throw new RuntimeException("Database Connector Class Not Found");
-        }
-
-        return DriverManager.getConnection(JDBC_SQLITE_METROLINK_DB);
-    }
 
 }

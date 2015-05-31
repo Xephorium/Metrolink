@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.ArrayList;
 
-@Repository("databaseReader")
+@Repository
 public class SqliteDAO implements MetrolinkDAO
 {
     /*--- Fields ---*/

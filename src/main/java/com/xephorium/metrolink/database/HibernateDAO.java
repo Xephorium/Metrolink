@@ -10,13 +10,14 @@
 */
 package com.xephorium.metrolink.database;
 
-import com.xephorium.metrolink.database.recordORM.*;
-import com.xephorium.metrolink.database.recordORM.Time;
+import com.xephorium.metrolink.database.record.*;
+import com.xephorium.metrolink.database.record.Time;
 import org.hibernate.*;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import java.util.ArrayList;
+import java.util.*;
 
 @Repository("databaseReader")
 public class HibernateDAO implements MetrolinkDAO
@@ -32,19 +33,32 @@ public class HibernateDAO implements MetrolinkDAO
     {
         sessionFactory.getCurrentSession().beginTransaction();
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Station.class);
-        // List list = criteria.list(); // ArrayList Conversion Issue
+        criteria.add(Restrictions.like("name", "METROLINK STATION", MatchMode.ANYWHERE));
+        @SuppressWarnings("unchecked")
+        List<Station> list = criteria.list();
         sessionFactory.getCurrentSession().getTransaction().commit();
-        return new ArrayList<Station>();
+
+        return new ArrayList<Station>(list);
     }
 
     public ArrayList<Time> getStationArrivals(int stationID)
     {
         sessionFactory.getCurrentSession().beginTransaction();
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Time.class);
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Arrival.class);
         criteria.add(Restrictions.eq("stop_id", stationID));
-        // List list = criteria.list(); // ArrayList Conversion Issue
+        @SuppressWarnings("unchecked")
+        List<Arrival> list = criteria.list();
         sessionFactory.getCurrentSession().getTransaction().commit();
-        return new ArrayList<Time>();
+
+        return convertArrivals(list);
+    }
+
+    private ArrayList<Time> convertArrivals(List<Arrival> arrivals)
+    {
+        ArrayList<Time> times = new ArrayList<Time>();
+        for(Arrival ar: arrivals)
+            times.add(Time.convertString(ar.getTime()));
+        return times;
     }
 
 

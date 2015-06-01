@@ -34,13 +34,14 @@
 
         <property name="annotatedClasses">
             <list>
-                <!-- List Custom Annotations Here -->
+                <value>com.xephorium.metrolink.database.record.Station</value>
+                <value>com.xephorium.metrolink.database.record.Arrival</value>
             </list>
         </property>
 
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.SQLiteDialect</prop>
+                <prop key="hibernate.dialect">com.xephorium.metrolink.org.hibernate.dialect.SQLiteDialect</prop>
                 <prop key="hibernate.current_session_context_class">thread</prop>
             </props>
         </property>

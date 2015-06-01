@@ -19,7 +19,7 @@ public interface MetrolinkDAO
 {
     /*--- Methods ---*/
 
-    public ArrayList getStations();
+    public ArrayList<Station> getStations();
 
-    public ArrayList getStationArrivals(int stationID);
+    public ArrayList<Time> getStationArrivals(int stationID);
 }

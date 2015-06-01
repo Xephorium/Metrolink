@@ -10,15 +10,26 @@
 */
 package com.xephorium.metrolink.database.record;
 
+import javax.persistence.*;
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
+@Table(name="stops")
 public class Station
 {
     /*--- Fields ---*/
 
-    String name;
-    int    id;
+    @Id
+    @GeneratedValue(strategy=IDENTITY)
+    @Column(name="stop_id", unique=true, nullable=false)
+    private int id;
+    @Column(name="stop_name")
+    private String name;
 
 
     /*--- Constructor(s) ---*/
+
+    public Station() {}
 
     public Station(String n)
     {

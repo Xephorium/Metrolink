@@ -10,31 +10,58 @@
 */
 package com.xephorium.metrolink.database.record;
 
+import javax.persistence.*;
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
+@Table(name="stop_times")
 public class Arrival
 {
     /*--- Fields ---*/
 
-    Time time;
-
+    @Id
+    @GeneratedValue(strategy=IDENTITY)
+    @Column(name="arrival_time")
+    private String time;
+    @Column(name="stop_id")
+    private int stop_id;
 
     /*--- Constructor(s) ---*/
 
-    public Arrival(Time t)
+    public Arrival() {}
+
+    public Arrival(String t)
     {
         time = t;
+    }
+
+    public Arrival(String t, int id)
+    {
+        time    = t;
+        stop_id = id;
     }
 
 
     /*--- Methods ---*/
 
-    public void setTime(Time t)
+    public void setTime(String t)
     {
         time = t;
     }
 
-    public Time getTime()
+    public void setStopID(int id)
+    {
+        stop_id = id;
+    }
+
+    public String getTime()
     {
         return time;
+    }
+
+    public int getStopID()
+    {
+        return stop_id;
     }
 
 }
